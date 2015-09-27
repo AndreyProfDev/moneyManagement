@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+       <import resource="classpath:spring/databaseConfig.xml"/>
+
+       <beans:map id="envToUpgrades">
+              <entry key="prod">
+                     <list>
+                            <bean class="com.moneyManagement.upgrades.CUpgradeInitDatabase"/>
+                            <bean class="com.moneyManagement.upgrades.CUpgradePopulateWithDefaults"/>
+                     </list>
+              </entry>
+              <entry key="jetty">
+                     <list>
+                            <bean class="com.moneyManagement.upgrades.CUpgradeResetDatabase"/>
+                            <bean class="com.moneyManagement.upgrades.CUpgradeInitDatabase"/>
+                            <bean class="com.moneyManagement.upgrades.CUpgradePopulateWithDefaults"/>
+                            <bean class="com.moneyManagement.upgrades.CUpgradePopulateDatabase"/>
+                     </list>
+              </entry>
+              <entry key="test">
+                     <list>
+                            <bean class="com.moneyManagement.upgrades.CUpgradeResetDatabase"/>
+                            <bean class="com.moneyManagement.upgrades.CUpgradeInitDatabase"/>
+                     </list>
+              </entry>
+       </beans:map>
+
+       <bean id="dbUpgrades" class="com.moneyManagement.upgrades.CUpgradesApplier" init-method="applyUpgrades">
+              <property name="commonUpgrades" value="#{envToUpgrades[${app.env}]}"/>
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="accountDAO" class="com.moneyManagement.api.implementations.CAccountDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="userDAO" class="com.moneyManagement.api.implementations.CUserDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="categoryDAO" class="com.moneyManagement.api.implementations.CCategoryDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="exchangeRateDAO" class="com.moneyManagement.api.implementations.CExchangeRateDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="incomeExpenseTransactionDAO" class="com.moneyManagement.api.implementations.CIncomeExpenseTransactionDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="incomeExpenseTransactionItemDAO" class="com.moneyManagement.api.implementations.CIncomeExpenseTransactionItemDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="planItemDAO" class="com.moneyManagement.api.implementations.CPlanItemDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="transferTransactionDAO" class="com.moneyManagement.api.implementations.CTransferTransactionDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="currencyDAO" class="com.moneyManagement.api.implementations.CCurrencyDAO">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <bean id="ping" class="com.moneyManagement.api.implementations.CPing"/>
+</beans>

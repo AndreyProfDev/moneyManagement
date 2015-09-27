@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean name="/accountDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IAccountDAO"/>
+        <property name="service" ref="accountDAO"/>
+    </bean>
+
+    <bean name="/userDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IUserDAO"/>
+        <property name="service" ref="userDAO"/>
+    </bean>
+
+    <bean name="/categoryDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ICategoryDAO"/>
+        <property name="service" ref="categoryDAO"/>
+    </bean>
+
+    <bean name="/exchangeRateDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IExchangeRateDAO"/>
+        <property name="service" ref="exchangeRateDAO"/>
+    </bean>
+
+    <bean name="/incomeExpenseTransactionDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IIncomeExpenseTransactionDAO"/>
+        <property name="service" ref="incomeExpenseTransactionDAO"/>
+    </bean>
+
+    <bean name="/planItemDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IPlanItemDAO"/>
+        <property name="service" ref="planItemDAO"/>
+    </bean>
+
+    <bean name="/transferTransactionDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ITransferTransactionDAO"/>
+        <property name="service" ref="transferTransactionDAO"/>
+    </bean>
+
+    <bean name="/pingService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IPing"/>
+        <property name="service" ref="ping"/>
+    </bean>
+
+    <bean name="/currencyDAOService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ICurrencyDAO"/>
+        <property name="service" ref="currencyDAO"/>
+    </bean>
+</beans>
