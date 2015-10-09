@@ -11,7 +11,7 @@
 
     <artifactId>database_server</artifactId>
 
-    <packaging>war</packaging>
+    <packaging>${packaging.type}</packaging>
 
     <dependencies>
         <dependency>
@@ -21,31 +21,87 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.8.v20150217</version>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>app.env</name>
-                            <value>jetty</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
+    <properties>
+        <exeFileName>server</exeFileName>
+    </properties>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-                </configuration>
-            </plugin>
 
-        </plugins>
-    </build>
+
+    <profiles>
+        <profile>
+            <id>jetty</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <packaging.type>war</packaging.type>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.2.8.v20150217</version>
+                        <configuration>
+                            <systemProperties>
+                                <systemProperty>
+                                    <name>app.env</name>
+                                    <value>jetty</value>
+                                </systemProperty>
+                            </systemProperties>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <configuration>
+                            <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+                        </configuration>
+                    </plugin>
+                    <!--<plugin>-->
+                        <!--<groupId>com.akathist.maven.plugins.launch4j</groupId>-->
+                        <!--<artifactId>launch4j-maven-plugin</artifactId>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>l4j-windowsServer</id>-->
+                                <!--<phase>package</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>launch4j</goal>-->
+                                <!--</goals>-->
+                                <!--<configuration>-->
+                                    <!--<headerType>console</headerType>-->
+                                    <!--<outfile>target/${exeFileName}.exe</outfile>-->
+                                    <!--<jar>target/${project.artifactId}-${project.version}.jar</jar>-->
+                                    <!--<errTitle>${product.title}</errTitle>-->
+                                    <!--<icon>main_icon.ico</icon>-->
+                                    <!--<classPath>-->
+                                        <!--<mainClass>com.moneyManagement.RMILauncher</mainClass>-->
+                                        <!--<addDependencies>true</addDependencies>-->
+                                        <!--<preCp>anything</preCp>-->
+                                    <!--</classPath>-->
+                                    <!--<jre>-->
+                                        <!--<minVersion>${jdkVersion}.0</minVersion>-->
+                                    <!--</jre>-->
+                                    <!--<versionInfo>-->
+                                        <!--<fileVersion>${project.version}.0</fileVersion>-->
+                                        <!--<txtFileVersion>${project.version}</txtFileVersion>-->
+                                        <!--<fileDescription>Money management is a small convenient tool for managing your home finances (server)</fileDescription>-->
+                                        <!--<copyright>Copyright © 2015 ${product.company}</copyright>-->
+                                        <!--<productVersion>${project.version}.0</productVersion>-->
+                                        <!--<txtProductVersion>${project.version}</txtProductVersion>-->
+                                        <!--<companyName>${product.company}</companyName>-->
+                                        <!--<productName>${product.title}</productName>-->
+                                        <!--<internalName>${exeFileName}</internalName>-->
+                                        <!--<originalFilename>${exeFileName}.exe</originalFilename>-->
+                                    <!--</versionInfo>-->
+                                <!--</configuration>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                    <!--</plugin>-->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

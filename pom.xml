@@ -146,5 +146,9 @@
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <product.title>Money management</product.title>
+        <jdkVersion>1.7</jdkVersion>
+        <project.version>1.0</project.version>
+        <product.company>Andrey Pigarev</product.company>
     </properties>
 </project>

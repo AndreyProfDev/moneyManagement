@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <import resource="classpath:spring/dao.xml"/>
+
+       <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+              <!-- does not necessarily have to be the same name as the bean to be exported -->
+              <property name="serviceName" value="accountDAOService"/>
+              <property name="service" ref="accountDAO"/>
+              <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IAccountDAO"/>
+              <!-- defaults to 1099 -->
+              <property name="registryPort" value="1199"/>
+       </bean>
+
+        <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+            <!-- does not necessarily have to be the same name as the bean to be exported -->
+            <property name="serviceName" value="userDAOService"/>
+            <property name="service" ref="userDAO"/>
+            <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IUserDAO"/>
+            <!-- defaults to 1099 -->
+            <property name="registryPort" value="1199"/>
+        </bean>
+
+        <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+            <!-- does not necessarily have to be the same name as the bean to be exported -->
+            <property name="serviceName" value="categoryDAOService"/>
+            <property name="service" ref="categoryDAO"/>
+            <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ICategoryDAO"/>
+            <!-- defaults to 1099 -->
+            <property name="registryPort" value="1199"/>
+        </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="exchangeRateDAOService"/>
+        <property name="service" ref="exchangeRateDAO"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IExchangeRateDAO"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="incomeExpenseTransactionDAOService"/>
+        <property name="service" ref="incomeExpenseTransactionDAO"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IIncomeExpenseTransactionDAO"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="planItemDAOService"/>
+        <property name="service" ref="planItemDAO"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IPlanItemDAO"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="transferTransactionDAOService"/>
+        <property name="service" ref="transferTransactionDAO"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ITransferTransactionDAO"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="pingService"/>
+        <property name="service" ref="ping"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.IPing"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="currencyDAOService"/>
+        <property name="service" ref="currencyDAO"/>
+        <property name="serviceInterface" value="com.moneyManagement.api.interfaces.ICurrencyDAO"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+</beans>
